@@ -74,5 +74,5 @@
         summarise_each(funs(mean)) %>%
         print
       
-      write.table(result,file="c:/Temp/rprogclass/data_clean/result.txt",sep="\t",row.names=F)
+      write.table(result,file="c:/Temp/rprogclass/data_clean/result.txt",sep="\t",row.name=F)
 
