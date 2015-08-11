@@ -21,13 +21,13 @@ It assumes windows format (sorry unix/linux/mac users....)
 
 #Steps:
 
-  1. Download data from link store in ..../data/ 
+  1. Download and unzip data from link store in ..../data/ 
   2. set wd = "C:/..../data/"
   3. Run run_analysis.r which does the following:
     1. binds active_train onto active_test (These are the human subjects doing the activities)
     2. binds y_train_data onto y_test_data (These are the activities they do)
     3. combines those two into 1 data frame.
-    4. add a meaninful description to the y_test_data which is a description of the activity being down by each test subject.
+    4. add a meaninful description to the y_test_data which is a description of the activity being down by each test subject. Here it is important to note that only spaces and characters were removed. The lab's descriptions were kept to presever the integrity of what they were measuring
     5. bind x_train_data onto x_test_data (These are the results of the activities done by the human subjects)
     6. assignns meaninful headers from features.txt.
     7. pulls out 86 of the 561 columns relating to mean and standard deviation.
@@ -38,94 +38,95 @@ It assumes windows format (sorry unix/linux/mac users....)
   
 #variable information.  
 The 88 columns in the files are included below (a more complete description of what these headers means comes from the feature.info.txt file included after the 88 files.)
-  1.                               subject : The human subject who did the activity.
-  2.                         activity_name : The activity they did.
-  3.                     tBodyAcc.mean...X
-  4.                     tBodyAcc.mean...Y
-  5.                     tBodyAcc.mean...Z
-  6.                  tGravityAcc.mean...X
-  7.                   tGravityAcc.mean...Y
-  8.                  tGravityAcc.mean...Z
-  9.                 tBodyAccJerk.mean...X
-  10.                tBodyAccJerk.mean...Y
-  11.                tBodyAccJerk.mean...Z
-  12.                   tBodyGyro.mean...X
-  13.                   tBodyGyro.mean...Y
-  14.                   tBodyGyro.mean...Z
-  15.               tBodyGyroJerk.mean...X
-  16.               tBodyGyroJerk.mean...Y
-  17.               tBodyGyroJerk.mean...Z
-  18.                   tBodyAccMag.mean..
-  19.                tGravityAccMag.mean..
-  20.               tBodyAccJerkMag.mean..
-  21.                  tBodyGyroMag.mean..
-  22.              tBodyGyroJerkMag.mean..
-  23.                    fBodyAcc.mean...X
-  24.                    fBodyAcc.mean...Y
-  25.                    fBodyAcc.mean...Z
-  26.                fBodyAcc.meanFreq...X
-  27.                fBodyAcc.meanFreq...Y
-  28.                fBodyAcc.meanFreq...Z
-  29.                fBodyAccJerk.mean...X
-  30.                fBodyAccJerk.mean...Y
-  31.                fBodyAccJerk.mean...Z
-  32.            fBodyAccJerk.meanFreq...X
-  33.            fBodyAccJerk.meanFreq...Y
-  34.            fBodyAccJerk.meanFreq...Z
-  35.                   fBodyGyro.mean...X
-  36.                   fBodyGyro.mean...Y
-  37.                   fBodyGyro.mean...Z
-  38.               fBodyGyro.meanFreq...X
-  39.               fBodyGyro.meanFreq...Y
-  40.               fBodyGyro.meanFreq...Z
-  41.                   fBodyAccMag.mean..
-  42.               fBodyAccMag.meanFreq..
-  43.           fBodyBodyAccJerkMag.mean..
-  44.       fBodyBodyAccJerkMag.meanFreq..
-  45.              fBodyBodyGyroMag.mean..
-  46.          fBodyBodyGyroMag.meanFreq..
-  47.          fBodyBodyGyroJerkMag.mean..
-  48.      fBodyBodyGyroJerkMag.meanFreq..
-  49.          angle.tBodyAccMean.gravity.
-  50. angle.tBodyAccJerkMean..gravityMean.
-  51.     angle.tBodyGyroMean.gravityMean.
-  52. angle.tBodyGyroJerkMean.gravityMean.
-  53.                 angle.X.gravityMean.
-  54.                 angle.Y.gravityMean.
-  55.                 angle.Z.gravityMean.
-  56.                     tBodyAcc.std...X
-  57.                     tBodyAcc.std...Y
-  58.                     tBodyAcc.std...Z
-  59.                  tGravityAcc.std...X
-  60.                  tGravityAcc.std...Y
-  61.                  tGravityAcc.std...Z
-  62.                 tBodyAccJerk.std...X
-  63.                 tBodyAccJerk.std...Y
-  64.                 tBodyAccJerk.std...Z
-  65.                    tBodyGyro.std...X
-  66.                    tBodyGyro.std...Y
-  67.                    tBodyGyro.std...Z
-  68.                tBodyGyroJerk.std...X
-  69.                tBodyGyroJerk.std...Y
-  70.                tBodyGyroJerk.std...Z
-  71.                    tBodyAccMag.std..
-  72.                 tGravityAccMag.std..
-  73.                tBodyAccJerkMag.std..
-  74.                   tBodyGyroMag.std..
-  75.               tBodyGyroJerkMag.std..
-  76.                     fBodyAcc.std...X
-  77.                     fBodyAcc.std...Y
-  78.                     fBodyAcc.std...Z
-  79.                 fBodyAccJerk.std...X
-  80.                 fBodyAccJerk.std...Y
-  81.                 fBodyAccJerk.std...Z
-  82.                    fBodyGyro.std...X
-  83.                    fBodyGyro.std...Y 
-  84.                    fBodyGyro.std...Z
-  85.                    fBodyAccMag.std..
-  86.            fBodyBodyAccJerkMag.std..
-  87.               fBodyBodyGyroMag.std..
-  88.           fBodyBodyGyroJerkMag.std..
+
+     1.                           subject : The human who did the activity.
+     2.                          activity : The activity performed by the human
+     3.                     tBodyAccmeanX
+     4.                     tBodyAccmeanY
+     5.                     tBodyAccmeanZ
+     6.                  tGravityAccmeanX
+     7.                  tGravityAccmeanY
+     8.                  tGravityAccmeanZ
+     9.                 tBodyAccJerkmeanX
+     10.                 tBodyAccJerkmeanY
+     11.                 tBodyAccJerkmeanZ
+     12.                    tBodyGyromeanX
+     13.                    tBodyGyromeanY
+     14.                    tBodyGyromeanZ
+     15.                tBodyGyroJerkmeanX
+     16.                tBodyGyroJerkmeanY
+     17.                tBodyGyroJerkmeanZ
+     18.                   tBodyAccMagmean
+     19.                tGravityAccMagmean
+     20.               tBodyAccJerkMagmean
+     21.                  tBodyGyroMagmean
+     22.              tBodyGyroJerkMagmean
+     23.                     fBodyAccmeanX
+     24.                     fBodyAccmeanY
+     25.                     fBodyAccmeanZ
+     26.                 fBodyAccmeanFreqX
+     27.                 fBodyAccmeanFreqY
+     28.                 fBodyAccmeanFreqZ
+     29.                 fBodyAccJerkmeanX
+     30.                 fBodyAccJerkmeanY
+     31.                 fBodyAccJerkmeanZ
+     32.             fBodyAccJerkmeanFreqX
+     33.             fBodyAccJerkmeanFreqY
+     34.             fBodyAccJerkmeanFreqZ
+     35.                    fBodyGyromeanX
+     36.                    fBodyGyromeanY
+     37.                    fBodyGyromeanZ
+     38.                fBodyGyromeanFreqX
+     39.                fBodyGyromeanFreqY
+     40.                fBodyGyromeanFreqZ
+     41.                   fBodyAccMagmean
+     42.               fBodyAccMagmeanFreq
+     43.           fBodyBodyAccJerkMagmean
+     44.       fBodyBodyAccJerkMagmeanFreq
+     45.              fBodyBodyGyroMagmean
+     46.          fBodyBodyGyroMagmeanFreq
+     47.          fBodyBodyGyroJerkMagmean
+     48.      fBodyBodyGyroJerkMagmeanFreq
+     49.          angletBodyAccMeangravity
+     50.  angletBodyAccJerkMeangravityMean
+     51.     angletBodyGyroMeangravityMean
+     52. angletBodyGyroJerkMeangravityMean
+     53.                 angleXgravityMean
+     54.                 angleYgravityMean
+     55.                 angleZgravityMean
+     56.                      tBodyAccstdX
+     57.                      tBodyAccstdY
+     58.                      tBodyAccstdZ
+     59.                   tGravityAccstdX
+     60.                   tGravityAccstdY
+     61.                   tGravityAccstdZ
+     62.                  tBodyAccJerkstdX
+     63.                  tBodyAccJerkstdY
+     64.                  tBodyAccJerkstdZ
+     65.                     tBodyGyrostdX
+     66.                     tBodyGyrostdY
+     67.                     tBodyGyrostdZ
+     68.                 tBodyGyroJerkstdX
+     69.                 tBodyGyroJerkstdY
+     70.                 tBodyGyroJerkstdZ
+     71.                    tBodyAccMagstd
+     72.                 tGravityAccMagstd
+     73.                tBodyAccJerkMagstd
+     74.                   tBodyGyroMagstd
+     75.               tBodyGyroJerkMagstd
+     76.                      fBodyAccstdX
+     77.                      fBodyAccstdY
+     78.                      fBodyAccstdZ
+     79.                  fBodyAccJerkstdX
+     80.                  fBodyAccJerkstdY
+     81.                  fBodyAccJerkstdZ
+     82.                     fBodyGyrostdX
+     83.                     fBodyGyrostdY
+     84.                     fBodyGyrostdZ
+     85.                    fBodyAccMagstd
+     86.            fBodyBodyAccJerkMagstd
+     87.               fBodyBodyGyroMagstd
+     88.           fBodyBodyGyroJerkMagstd
 
 #Feature Selection 
 =================
