@@ -41,18 +41,24 @@
 #Merge rows of the training activity onto test activity
       pr_dt2 <- rbind(y_train_data,y_test_data)
       pr_dt1 <- rbind(activ_train,activ_test)
+      
+      
 #Now we want to read and apply a meaninful name to activity to each activity for train and test
 # CODEX: 1 WALKING  2 WALKING_UPSTAIRS 3 WALKING_DOWNSTAIRS 4 SITTING 5 STANDING 6 LAYING      
-      pr_dt3 <- ifelse(
-        pr_dt2[,1] == 1,"WALKING",ifelse(
-          pr_dt2[,1] == 2, "WALKING_UPSTAIRS",ifelse(
-            pr_dt2[,1] == 3, "WALKING_DOWNSTAIRS",ifelse(
-              pr_dt2[,1] == 4,"SITTING",ifelse(
-                pr_dt2[,1] == 5,"STANDING",ifelse(
-                  pr_dt2[,1] == 6,"LAYING",NA))))))
+      # we could use an ifelse string 6 deep.  Instead we use:
+      pr_dt2.names <- c("WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING")
+      pr_v <- c(pr_dt2[,1])
+      pr_dt3 <- data.frame(pr_dt2.names[pr_v])
+      #pr_dt3 <- ifelse(
+      #  pr_dt2[,1] == 1,"WALKING",ifelse(
+      #    pr_dt2[,1] == 2, "WALKING_UPSTAIRS",ifelse(
+      #      pr_dt2[,1] == 3, "WALKING_DOWNSTAIRS",ifelse(
+      #        pr_dt2[,1] == 4,"SITTING",ifelse(
+      #          pr_dt2[,1] == 5,"STANDING",ifelse(
+      #            pr_dt2[,1] == 6,"LAYING",NA))))))
 #Now we combine the subject,activity, activity name together in preparation of combining it to actual data.      
       pre_col <- cbind(pr_dt1,pr_dt2,pr_dt3)
-      colnames(pre_col) <- c("subject","activity","activity_name")
+      colnames(pre_col) <- c("subject","activityID","activity")
 #apply meaningful col.names to x(train,test) data. This comes from features.txt. We only need only c2 from features.txt.
       colnames(x_train_data) <- col_headers[,2]
       colnames(x_test_data)<- col_headers[,2]
@@ -62,17 +68,20 @@
       nice_raw_data <- cbind(pre_col,tot_data)
 #Make the column names non-duplicated and friendly for select(contain())
       unique_col_names <- make.names(names=names(nice_raw_data),unique=T,allow_=T)
-      colnames(nice_raw_data) <- unique_col_names
+      cols1 <- gsub("\\.","",unique_col_names)
+      colnames(nice_raw_data) <- cols1
+
 # At this point: data(train,test) are merged. Subjct, and activity are attached as well.Column names are meaninful.
 # Now we need to simplify the data set pulling out only means and standard deviations (and also subject and activity)      
 # We store it in "result"
       library(dplyr)
       result <- nice_raw_data %>%
-        select(subject,activity_name,contains("mean"),contains("std")) %>%
-        arrange(subject,activity_name) %>%
-        group_by(subject,activity_name) %>%
-        summarise_each(funs(mean)) %>%
+        select(subject,activity,contains("mean"),contains("std")) %>%
+        arrange(subject,activity) %>%
+        group_by(subject,activity) %>%
+        summarise_each(funs(mean)) 
         print
+
       
-      write.table(result,file="c:/Temp/rprogclass/data_clean/result.txt",sep="\t",row.name=F)
+write.table(result,file="c:/Temp/rprogclass/data_clean/result.txt",sep="\t",row.name=F)
 
